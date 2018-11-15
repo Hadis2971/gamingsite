@@ -1,9 +1,12 @@
 const express = require("express");
 const exphbs  = require("express-handlebars");
 const path    = require("path");
+const db      = require("./DB");
 
 const app = express();
 app.set("port", (process.env.PORT || 3000));
+
+db.setConnection();
 
 app.set("view engine", "handlebars");
 app.set("views", path.join(__dirname, "views"));
