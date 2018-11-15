@@ -7,6 +7,19 @@
     <title>Gaming World</title>
 </head>
 <body>
-    
+    <form 
+    style="width:65%;margin:3% auto;background-color:#f2f2f2;
+    border:0.03em solid #eee;box-sizing:border-box;padding:3%;"
+    action="/users/login" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-outline-primary btn-block mt-3">Login</button>
+    </form>
 </body>
 </html>
