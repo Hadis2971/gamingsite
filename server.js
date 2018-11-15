@@ -3,8 +3,12 @@ const exphbs  = require("express-handlebars");
 const path    = require("path");
 const db      = require("./DB");
 
+
 const app = express();
 app.set("port", (process.env.PORT || 3000));
+
+const forumRouter = require("./Components/forum/forumRouter");
+const errorRouter = require("./Components/errorHandling");
 
 db.setConnection();
 
@@ -14,6 +18,9 @@ app.engine("handlebars", exphbs({defaultLayout: "layout"}));
 
 app.use(express.static("public"));
 
+app.use("/", forumRouter);
+
+app.use(errorRouter);
 
 app.listen(app.get("port"), (err) => {
     if(err) throw err;
