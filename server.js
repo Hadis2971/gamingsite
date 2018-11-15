@@ -1,5 +1,6 @@
 const express = require("express");
 const exphbs  = require("express-handlebars");
+const expval  = require("express-validator");
 const path    = require("path");
 const db      = require("./DB");
 
@@ -20,6 +21,7 @@ app.engine("handlebars", exphbs({defaultLayout: "layout"}));
 app.use(express.static(__dirname + "/public"));
 app.use(express.static(__dirname + "/client"));
 
+app.use(expval());
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
