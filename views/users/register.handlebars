@@ -9,6 +9,15 @@
 </head>
 <body>
     <form action="/users/register" method="POST" enctype="multipart/form-data">
+    {{#each errors}}
+        <div class="alert alert-info">{{msg}}</div>
+    {{/each}}
+    {{#if user}}
+        <div class="alert alert-info">That Username Has Already Been Taken</div>
+    {{/if}}
+    {{#if mail}}
+        <div class="alert alert-info">That Email Address Has Already Been Taken</div>
+    {{/if}}
         <h1 class="text-center display-4" style="color:#FFF;">Sign Up</h1>
         <div class="form-group">
             <label for="username">Username</label>
@@ -27,7 +36,7 @@
             <input type="password" id="password2" name="password2" class="form-control" />
         </div>
         <div class="custom-file">
-            <input type="file" class="custom-file-input" name="profileImage" id="profileImage" required>
+            <input type="file" class="custom-file-input" name="profileImage" id="profileImage">
             <label class="custom-file-label" for="profileImage">Choose file...</label>
             <div class="invalid-feedback">Example invalid custom file feedback</div>
         </div>

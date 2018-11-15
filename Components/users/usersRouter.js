@@ -1,10 +1,12 @@
-const router = require("express").Router();
-const config =  require("../../config");
-const path   = require("path");
-const crypto = require("crypto");
-const multer = require("multer");
-const Grid   = require("gridfs-stream");
+const router   = require("express").Router();
+const config   = require("../../config");
+const path     = require("path");
+const mongoose = require("mongoose");
+const crypto   = require("crypto");
+const multer   = require("multer");
+const Grid     = require("gridfs-stream");
 const GridFsStorage = require("multer-gridfs-storage");
+const User     = require("../../Models/User");
 
 const storage = new GridFsStorage({
 url: config.dbURI,
@@ -16,7 +18,7 @@ file: (req, file) => {
         }
         const filename = buf.toString('hex') + path.extname(file.originalname);
         const fileInfo = {
-        filename: filename,
+        filename: filename || "",
         bucketName: 'profileImages'
         };
         resolve(fileInfo);
@@ -42,7 +44,50 @@ router.get("/login", (req, res) => {
 });
 
 router.post("/register", upload.single('profileImage'), (req, res) => {
-    
+    req.checkBody("username", "The Username Field is Mandatory").notEmpty();
+    req.checkBody("email", "The Email Field is Mandatory").notEmpty();
+    req.checkBody("password", "The Password Field is Mandatory").notEmpty();
+    req.checkBody("password2", "The Confirm Password Field is Mandatory").notEmpty();
+    req.checkBody("password2", "The Passwords Must Match").equals(req.body.password);
+
+    let file = "";
+    if(req.file){
+        file = req.file.filename;
+    }
+
+    const errors = req.validationErrors();
+
+    if(errors){
+        res.render("users/register", {errors: errors, layout: "reglogLayout"});
+    }else{
+
+        User.findOne({username: req.body.username}, (err, user) => {
+            User.findOne({email: req.body.email}, (err, mail) => {
+                if(err) throw err;
+                else{
+                    if(user || mail){
+                        res.render("users/register", 
+                        {user: user, mail: mail, layout: "reglogLayout"});
+                    }else{
+                        let newUser =  new User({
+                            username: req.body.username,
+                            email: req.body.email,
+                            password: req.body.password,
+                            profileImage: file
+                        });
+
+                        User.createUser(newUser, (err, user) => {
+                            if(err) throw err;
+                            else{
+                                console.log(user);
+                                res.redirect("login");
+                            }
+                        });
+                    }
+                }
+            });
+        });
+    }
 });
 
 
