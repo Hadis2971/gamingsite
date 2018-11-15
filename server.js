@@ -18,6 +18,8 @@ app.set("views", path.join(__dirname, "views"));
 app.engine("handlebars", exphbs({defaultLayout: "layout"}));
 
 app.use(express.static(__dirname + "/public"));
+app.use(express.static(__dirname + "/client"));
+
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 

@@ -1,0 +1,19 @@
+form{
+    width:65%;
+    margin:3% auto;
+    background-color:transparent;
+    color: #FFF;
+    border:0.03em solid #eee;
+    box-sizing:border-box;
+    padding:3%;
+}
+
+form input{
+    color: #2D2D2D;
+    outline: none;
+}
+
+form input:focus{
+    box-shadow: none;
+    outline: none;
+}
