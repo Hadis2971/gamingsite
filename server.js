@@ -3,7 +3,7 @@ const exphbs  = require("express-handlebars");
 const expval  = require("express-validator");
 const path    = require("path");
 const db      = require("./DB");
-
+const session = require("./Session");
 
 const app = express();
 app.set("port", (process.env.PORT || 3000));
@@ -24,6 +24,8 @@ app.use(express.static(__dirname + "/client"));
 app.use(expval());
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
+
+app.use(session);
 
 app.use("/users", usersRouter);
 app.use("/", forumRouter);
