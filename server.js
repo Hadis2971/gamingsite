@@ -4,6 +4,7 @@ const expval  = require("express-validator");
 const path    = require("path");
 const db      = require("./DB");
 const session = require("./Session");
+const flash   = require("connect-flash");
 
 const app = express();
 app.set("port", (process.env.PORT || 3000));
@@ -26,6 +27,12 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
 app.use(session);
+app.use(flash());
+
+app.use((req, res, next) => {
+    res.locals.success_msg = req.flash("success_msg");
+    next();
+});
 
 app.use("/users", usersRouter);
 app.use("/", forumRouter);

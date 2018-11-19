@@ -80,6 +80,7 @@ router.post("/register", upload.single('profileImage'), (req, res) => {
                             if(err) throw err;
                             else{
                                 console.log(user);
+                                req.flash("success_msg", "You Have Successfully Registred And Can Now Login");
                                 res.redirect("login");
                             }
                         });

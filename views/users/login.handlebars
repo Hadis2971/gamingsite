@@ -9,6 +9,9 @@
 </head>
 <body>
     <form action="/users/login" method="POST">
+    {{#if success_msg}}
+        <div class="alert alert-success">{{success_msg}}</div>
+    {{/if}}
     <h1 class="text-center display-4" style="color:#FFF;">Sign Up</h1>
         <div class="form-group">
             <label for="username">Username</label>
