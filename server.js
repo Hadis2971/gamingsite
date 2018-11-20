@@ -1,10 +1,11 @@
-const express = require("express");
-const exphbs  = require("express-handlebars");
-const expval  = require("express-validator");
-const path    = require("path");
-const db      = require("./DB");
-const session = require("./Session");
-const flash   = require("connect-flash");
+const express  = require("express");
+const exphbs   = require("express-handlebars");
+const expval   = require("express-validator");
+const path     = require("path");
+const db       = require("./DB");
+const session  = require("./Session");
+const flash    = require("connect-flash");
+const passport = require("passport");
 
 const app = express();
 app.set("port", (process.env.PORT || 3000));
@@ -29,9 +30,16 @@ app.use(express.urlencoded({extended: false}));
 app.use(session);
 app.use(flash());
 
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+
 app.use((req, res, next) => {
     res.locals.success_msg = req.flash("success_msg");
     res.locals.error_msg   = req.flash("error_msg");
+    res.locals.error       = req.flash("error");
+    
     next();
 });
 

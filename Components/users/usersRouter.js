@@ -7,6 +7,8 @@ const multer   = require("multer");
 const Grid     = require("gridfs-stream");
 const GridFsStorage = require("multer-gridfs-storage");
 const User     = require("../../Models/User");
+const authStrg = require("../../auth_strategies");
+const passport = require("passport");
 
 const storage = new GridFsStorage({
 url: config.dbURI,
@@ -34,6 +36,8 @@ conn.once('open', function () {
   gfs = Grid(conn.db, mongoose.mongo);
   gfs.collection("profileImages");  
 });
+
+authStrg.localStrg(passport);
 
 router.get("/register", (req, res) => {
     res.render("users/register", {layout: "reglogLayout"});
@@ -92,6 +96,19 @@ router.post("/register", upload.single('profileImage'), (req, res) => {
 });
 
 
+router.post('/login',
+  passport.authenticate('local', { successRedirect: '/',
+                                   failureRedirect: '/users/login',
+                                   failureFlash: true })
+);
+
+
+
+
+router.get("/logout", (req, res) => {
+    req.logout();
+    res.redirect("/users/login");
+});
 
 router.get("/userImage/:filename", (req, res) => {
     gfs.files.find({filename: req.params.filename}, (err, file) => {

@@ -12,7 +12,13 @@
     {{#if success_msg}}
         <div class="alert alert-success">{{success_msg}}</div>
     {{/if}}
-    <h1 class="text-center display-4" style="color:#FFF;">Sign Up</h1>
+    {{#if error_msg}}
+        <div class="alert alert-success">{{error_msg}}</div>
+    {{/if}}
+    
+    {{> _error}}
+    
+    <h1 class="text-center display-4" style="color:#FFF;">Sign In</h1>
         <div class="form-group">
             <label for="username">Username</label>
             <input type="text" id="username" name="username" class="form-control" />
