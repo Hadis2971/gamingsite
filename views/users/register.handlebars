@@ -9,15 +9,20 @@
 </head>
 <body>
     <form action="/users/register" method="POST" enctype="multipart/form-data">
+    
     {{#each errors}}
-        <div class="alert alert-info">{{msg}}</div>
+        <div class="alert alert-warning">{{msg}}</div>
     {{/each}}
     {{#if user}}
-        <div class="alert alert-info">That Username Has Already Been Taken</div>
+        <div class="alert alert-warning">That Username Has Already Been Taken</div>
     {{/if}}
     {{#if mail}}
-        <div class="alert alert-info">That Email Address Has Already Been Taken</div>
+        <div class="alert alert-warning">That Email Address Has Already Been Taken</div>
     {{/if}}
+    {{#each mongooseErrors}}
+        <div class="alert alert-warning">{{this}}</div>
+    {{/each}}
+
         <h1 class="text-center display-4" style="color:#FFF;">Sign Up</h1>
         <div class="form-group">
             <label for="username">Username</label>

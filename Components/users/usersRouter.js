@@ -81,7 +81,13 @@ router.post("/register", upload.single('profileImage'), (req, res) => {
                         });
 
                         User.createUser(newUser, (err, user) => {
-                            if(err) throw err;
+                            if(err){
+                                const mongooseErrors = Object.keys(err.errors).map(key => {                                
+                                    return err.errors[key].properties.message
+                                });
+                                res.render("users/register", 
+                                {mongooseErrors: mongooseErrors, layout: "reglogLayout"});
+                            }
                             else{
                                 console.log(user);
                                 req.flash("success_msg", "You Have Successfully Registred And Can Now Login");
@@ -95,28 +101,29 @@ router.post("/register", upload.single('profileImage'), (req, res) => {
     }
 });
 
-
 router.post('/login',
   passport.authenticate('local', { successRedirect: '/',
-                                   failureRedirect: '/users/login',
-                                   failureFlash: true })
+  failureRedirect: '/users/login',
+  failureFlash: true })
 );
-
-
-
 
 router.get("/logout", (req, res) => {
     req.logout();
     res.redirect("/users/login");
 });
 
-router.get("/userImage/:filename", (req, res) => {
-    gfs.files.find({filename: req.params.filename}, (err, file) => {
-        if(err) throw err;
-        else{
-            const readstream = gfs.createReadStream(file.filename);
-            readstream.pipe(res);
-        }
+router.get("/userImage/:filename", (req, res, next) => {
+    gfs.files.findOne({filename: req.params.filename}, (err, file) => {
+        if(err){
+            next(err);
+        }else{
+            if(!file){
+                res.send("<h1 style=text-align:center;font-size:250%;color:#595959;>The Image That You Are Looking For Does Not Exist!!!</h1>");
+            }else{
+                const readstream = gfs.createReadStream(file.filename);
+                readstream.pipe(res);
+            }
+        }        
     });
 });
 
