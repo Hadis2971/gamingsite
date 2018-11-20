@@ -4,9 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="/styles/forumIndex.css" />
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
     <title>Gaming World</title>
 </head>
 <body>
-    <h1>Forum Index</h1>
+    <h1 id="hdr" class="text-center mt-3">I Don't Need "To Get A Life" I'm A Gamer I Have Lots Of Lives</h1>
+    {{#if success_msg}}
+        <div class="alert alert-success">{{success_msg}}</div>
+    {{/if}}
+    <form method="POST" action="/newTheme/{{user.username}}">
+        <div class="form-group">
+            <input type="text" id="themeInput" name="themeInput" class="form-control inputStyle" placeholder="New Theme..."/>
+        </div>
+        <button type="submit" class="btn btn-dark">Add Thema</button>
+    </form>
+    <div class="form-group" style="margin-top:5%;">
+        <input type="text" id="searchThemes" name="searchThemes" class="form-control inputStyle" placeholder="Search Thems..."/>
+    </div>
+    <button type="submit" class="btn btn-dark">Search Thems</button>
+    <div id="themsContainer" style="margin-top:7%;">
+        {{#each thems}}
+            <div class="themeBox">
+                <h5>{{this.title}}</h5>
+                <p class="lead">User: {{this.user}}</p>
+            </div>
+        {{/each}}
+    </div>
 </body>
 </html>

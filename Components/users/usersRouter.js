@@ -102,10 +102,10 @@ router.post("/register", upload.single('profileImage'), (req, res) => {
 });
 
 router.post('/login',
-  passport.authenticate('local', { successRedirect: '/',
-  failureRedirect: '/users/login',
-  failureFlash: true })
-);
+  passport.authenticate('local', {failureFlash: true, failureRedirect: '/users/login'}),
+  function(req, res) {
+    res.redirect('/');
+});
 
 router.get("/logout", (req, res) => {
     req.logout();

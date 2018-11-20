@@ -1,0 +1,68 @@
+body{
+    height: 100vh;
+    width: 100%;
+    background-image: url("/images/metal.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#hdr{
+    color: #FFF;
+    font-family: 'Indie Flower', Arial, Helvetica, cursive;
+    text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
+    0px 8px 13px rgba(0,0,0,0.1),
+    0px 18px 23px rgba(0,0,0,0.1);
+    font-size: 400%;
+}
+
+.inputStyle{
+    background-color: transparent;
+    color: #FFF;
+    border: none;
+    border-bottom: 0.05em solid #FFF;
+    border-bottom-right-radius: 0%;
+    border-bottom-left-radius:  0%;
+    outline: none;
+}
+
+.inputStyle:focus{
+    outline: none;
+    box-shadow: none;
+    background-color: transparent;
+    color: #FFF;
+}
+
+.form-control::-webkit-input-placeholder { color: white; }  
+.form-control:-moz-placeholder { color: white; } 
+.form-control::-moz-placeholder { color: white; } 
+.form-control:-ms-input-placeholder { color: white; }  
+.form-control::-ms-input-placeholder { color: white; }  
+
+#themsContainer{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.themeBox{
+    width: 31%;
+    box-sizing: border-box;
+    padding: 1%;
+    background-color: #2D2D2D;
+    border: 0.03em solid #FFF;
+    cursor: pointer;
+    color: #FFF;
+    margin: 1%;
+}
+
+@media only screen and (max-width: 700px){
+    #hdr{
+        font-size: 300%;
+    }
+}
+
+@media only screen and (max-width: 500px){
+    #hdr{
+        font-size: 200%;
+    }
+}
