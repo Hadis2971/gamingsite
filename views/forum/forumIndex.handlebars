@@ -13,6 +13,12 @@
     {{#if success_msg}}
         <div class="alert alert-success">{{success_msg}}</div>
     {{/if}}
+    {{#if info_msg}}
+        <div class="alert alert-info">{{info_msg}}</div>
+    {{/if}}
+    {{#if warning_msg}}
+        <div class="alert alert-warning">{{warning_msg}}</div>
+    {{/if}}
     <form method="POST" action="/newTheme/{{user.username}}">
         <div class="form-group">
             <input type="text" id="themeInput" name="themeInput" class="form-control inputStyle" placeholder="New Theme..."/>
@@ -25,10 +31,10 @@
     <button type="submit" class="btn btn-dark">Search Thems</button>
     <div id="themsContainer" style="margin-top:7%;">
         {{#each thems}}
-            <div class="themeBox">
+            <a href="/theme/{{this.title}}" target="_blank" class="themeBox">
                 <h5>{{this.title}}</h5>
                 <p class="lead">User: {{this.user}}</p>
-            </div>
+            </a>
         {{/each}}
     </div>
 </body>

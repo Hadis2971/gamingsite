@@ -9,6 +9,7 @@ const GridFsStorage = require("multer-gridfs-storage");
 const User     = require("../../Models/User");
 const authStrg = require("../../auth_strategies");
 const passport = require("passport");
+const util     = require("../../utilities");
 
 const storage = new GridFsStorage({
 url: config.dbURI,
@@ -82,9 +83,7 @@ router.post("/register", upload.single('profileImage'), (req, res) => {
 
                         User.createUser(newUser, (err, user) => {
                             if(err){
-                                const mongooseErrors = Object.keys(err.errors).map(key => {                                
-                                    return err.errors[key].properties.message
-                                });
+                                const mongooseErrors = util.getMongooseErr(err);
                                 res.render("users/register", 
                                 {mongooseErrors: mongooseErrors, layout: "reglogLayout"});
                             }

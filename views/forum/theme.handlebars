@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="/styles/theme.css" />
+    <title>Gaming Site</title>
+</head>
+<body>
+    <h1 class="display-4 text-center mt-3" style="color:#FFF;">{{title}}</h1>
+    <div id="posts">
+        {{#if posts}}
+        {{#each posts}}
+            <p class="post">{{this.text}}</p>
+        {{/each}}
+        {{else}}
+        <p class="lead text-center" style="font-size:150%;margin-top:15%;color:#FFF;">No Post For This Game</p>
+        {{/if}}
+    </div>
+    <form method="POST" action="/newPost/{{title}}">
+        <div class="form-group">
+            <input type="text" name="postInput" id="postInput" class="form-control inputStyle" placeholder="New Post..."/>
+            <button type="submit" class="btn btn-dark mt-3">Post!</button>
+        </div>
+    </form>
+</body>
+</html>
