@@ -84,4 +84,20 @@ router.post("/newPost/:title", (req, res) => {
     });
 });
 
+
+router.post("/newComment/:id", (req, res) => {
+    Post.findById(req.params.id, (err, post) => {
+        if(err) throw err;
+        else{
+            post.comments.push(req.body.commentInput);
+            post.save((err) => {
+                if(err) throw err;
+                else{
+                    res.redirect("back");
+                } 
+            });
+        }
+    });
+});
+
 module.exports = router;

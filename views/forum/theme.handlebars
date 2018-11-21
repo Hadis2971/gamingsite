@@ -12,7 +12,24 @@
     <div id="posts">
         {{#if posts}}
         {{#each posts}}
-            <p class="post">{{this.text}}</p>
+            <p class="post">
+                {{this.text}}
+                <span class="coment-click">Click to comment</span>
+                <div class="box">
+                    <div class="comments-box">
+                        <h5 style="color:#FFF;">Comments</h5>
+                        {{#each this.comments}}
+                            <p class="comment">{{this}}</p>
+                        {{/each}}
+                    </div>
+                    <form class="comment-form" method="POST" action="/newComment/{{this._id}}">
+                        <div class="form-group">
+                            <input type="text" class="form-control inputStyle" name="commentInput" placeholder="Add Comment..."/>
+                        </div>
+                        <button type="submit" class="btn btn-dark btn-small mt-2">Submit</button>
+                    </form>
+                </div>
+            </p>
         {{/each}}
         {{else}}
         <p class="lead text-center" style="font-size:150%;margin-top:15%;color:#FFF;">No Post For This Game</p>
@@ -24,5 +41,6 @@
             <button type="submit" class="btn btn-dark mt-3">Post!</button>
         </div>
     </form>
+    <script src="/scripts/theme.js"></script>
 </body>
 </html>

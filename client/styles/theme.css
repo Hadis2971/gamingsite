@@ -5,12 +5,33 @@ html, body{
 }
 
 #posts{
-    width: 70%;
-    min-height: 25em;
+    width: 85%;
+    height: 50vh;
     border: 0.05em solid #FFF;
     box-sizing: border-box;
     padding: 1.5%;
     margin: 3% auto;
+    overflow-y: auto;
+}
+
+.post{
+    position: relative;
+    width: 99%;
+    margin: 1.7% auto;
+    box-sizing: border-box;
+    padding: 1.1%;
+    background-color: #000;
+    color: #FFF;
+    font-size: 1.1em;
+}
+
+.coment-click{
+    position: absolute;
+    color: #FFF;
+    right: 0.3em;
+    bottom: 0.3em;
+    cursor: pointer;
+    font-size: 0.7em;
 }
 
 .inputStyle{
@@ -28,6 +49,23 @@ html, body{
     box-shadow: none;
     background-color: transparent;
     color: #FFF;
+}
+
+.box{
+    display: none;
+}
+
+.comment-form{
+    
+}
+
+.comments-box{
+    margin-top: 1%;
+}
+
+.comment{
+    color: #FFF;
+    list-style-type: disc;
 }
 
 .form-control::-webkit-input-placeholder { color: white; }  
