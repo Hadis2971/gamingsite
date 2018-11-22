@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="/styles/sellGames.css" />
+    <title>Gaming Site</title>
+</head>
+<body>
+    <h1 style="color:#FFF;font-weight:300;" class="text-center display-3">Sell Your Finished Games</h1>
+    <form method="POST" action="/sell/postGame/{{user._id}}" style="margin-top:9%;">
+    {{#each mongooseErrors}}
+        <div class="alert alert-warning">{{this}}</div>
+    {{/each}}
+    {{#if success_msg}}
+        <div class="alert alert-success">{{success_msg}}</div>
+    {{/if}}
+        <div class="form-group">
+            <input type="text" name="gameTitle" id="gameTitle" class="form-control inputStyle" placeholder="Add Game Title..."/>
+        </div>
+        <div class="form-group">
+            <input type="text" name="gameGenre" id="gameGenre" class="form-control inputStyle" placeholder="Add Genre..."/>
+        </div>
+        <div class="form-group">
+            <textarea class="form-control textAr" id="gameDescription" name="gameDescription" placeholder="Add Game Description..." rows="3"></textarea>
+        </div>
+        <div class="form-group">
+            <input type="text" name="gameUrl" id="gameUrl" class="form-control inputStyle" placeholder="Add URL For Image"/>
+        </div>
+        <button type="submit" class="btn btn-dark">Add Game!</button>
+    </form>
+</body>
+</html>

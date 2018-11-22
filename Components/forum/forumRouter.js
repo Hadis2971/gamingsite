@@ -45,7 +45,6 @@ router.get("/theme/:title", (req, res) => {
             Post.find({thema: theme._id}, (err, posts) => {
                 if(err) throw err;
                 else{
-                    console.log(posts);
                     res.render("forum/theme", {title: req.params.title, posts: posts});
                 }
             });

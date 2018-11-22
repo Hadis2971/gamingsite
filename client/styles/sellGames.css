@@ -1,0 +1,46 @@
+html, body{
+    height: 100vh;
+    width: 100%;
+    background-color: #4d4d4d;
+}
+
+
+.inputStyle{
+    background-color: transparent;
+    color: #FFF;
+    border: none;
+    border-bottom: 0.05em solid #FFF;
+    border-bottom-right-radius: 0%;
+    border-bottom-left-radius:  0%;
+    outline: none;
+    margin-bottom: 3.5%;
+}
+
+.inputStyle:focus{
+    outline: none;
+    box-shadow: none;
+    background-color: transparent;
+    color: #FFF;
+}
+
+.textAr{
+    background-color: transparent;
+    border: 0.05 solid #FFF;
+    resize: none;
+    outline: none;
+    box-shadow: none;
+    color: #FFF;
+}
+
+.textAr:focus{
+    background-color: transparent;
+    outline: none;
+    box-shadow: none;
+    color: #FFF;
+}
+
+.form-control::-webkit-input-placeholder { color: white; }  
+.form-control:-moz-placeholder { color: white; } 
+.form-control::-moz-placeholder { color: white; } 
+.form-control:-ms-input-placeholder { color: white; }  
+.form-control::-ms-input-placeholder { color: white; }  

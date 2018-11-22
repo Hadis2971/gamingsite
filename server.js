@@ -13,6 +13,8 @@ app.set("port", (process.env.PORT || 3000));
 const forumRouter = require("./Components/forum/forumRouter");
 const errorRouter = require("./Components/errorHandling");
 const usersRouter = require("./Components/users/usersRouter");
+const sellRouter  = require("./Components/sellGames");
+const buyRouter   = require("./Components/buyGames");
 
 db.setConnection();
 
@@ -44,6 +46,8 @@ app.use((req, res, next) => {
 });
 
 app.use("/users", usersRouter);
+app.use("/sell", sellRouter);
+app.use("/buy", buyRouter);
 app.use("/", forumRouter);
 
 app.use(errorRouter);
